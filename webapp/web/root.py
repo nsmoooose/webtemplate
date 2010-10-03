@@ -27,7 +27,6 @@ class Root(object):
         return template.render()
 
     @cherrypy.expose
-    @require(member_of("admin"))
     @template.output('about.html')
     def about(self):
         versions = {
