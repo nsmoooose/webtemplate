@@ -1,0 +1,4 @@
+#!/bin/sh
+export PYTHONPATH=.
+python webapp/tests/all.py -v
+

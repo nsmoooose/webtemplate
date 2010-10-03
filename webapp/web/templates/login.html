@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:xi="http://www.w3.org/2001/XInclude"
+      xmlns:py="http://genshi.edgewall.org/">
+  <xi:include href="master.html" />
+  <head>
+    <title>Login</title>
+  </head>
+  <body>
+    <h1>Login</h1>
+	<div class="help">
+	  You need an account to access information at this site. Please
+	  contact your sales representative for more information.
+	</div>
+	
+    <form method="post" action="/auth/login">
+      <input type="hidden" name="from_page" value="${from_page}" />
+      ${msg}<br />
+	  <table>
+		<tr>
+		  <td>Username:</td>
+		  <td>
+			<input type="text" name="username" value="${username}" />
+		  </td>
+		</tr>
+		<tr>
+		  <td>Password:</td>
+		  <td>
+			<input type="password" name="password" />
+		  </td>
+		</tr>
+	  </table>
+      <input type="submit" value="Log in" />
+	</form>
+  </body>
+</html>

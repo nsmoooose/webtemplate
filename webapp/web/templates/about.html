@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:xi="http://www.w3.org/2001/XInclude"
+      xmlns:py="http://genshi.edgewall.org/">
+  <xi:include href="master.html" />
+  <head>
+    <title>About</title>
+  </head>
+  <body>
+    <h1>About</h1>
+	<div class="help">
+	  About this application
+	</div>
+	<h2>Information</h2>
+	<p>
+	  This tool is developed with open source tools. Programing language 
+	  is a scriptable language named <a href="http://www.python.org">Python</a>.
+	  <a href="http://www.cherrypy.org">CherryPy</a> is used to serve pages.
+	  This is a tiny and efficient web server. 
+	</p>
+	<p>
+	  <a href="http://genshi.edgewall.org/">Genshi</a> is a powerfull 
+	  templating engine. It renders html content based on template files. 
+	  To validate content sent from the web client 
+	  <a href="http://formencode.org/">FormEncode</a> is used. It ensures that
+	  the application is protected from injection attacks.
+	</p>
+	<p>
+	  To store data <a href="http://www.sqlite.org/">SQLite</a> is used. SQLite is
+	  a tiny database engine used by embedded applications. To simplify database
+	  access an OR mapper has been used. It is named 
+	  <a href="http://www.sqlalchemy.org/">SQLAlchemy</a>. It maps between python 
+	  objects and database tables.
+	</p>
+	<h2>Development tools</h2>
+	<table class="listing">
+	  <thead>
+		<th>Component</th>
+		<th>Version</th>
+	  </thead>
+	  <tbody>
+		<py:for each="key, value in versions.iteritems()">
+		  <tr>
+			<td>${key}</td>
+			<td>${value}</td>
+		  </tr>
+		</py:for>
+	  </tbody>
+	</table>
+  </body>
+</html>

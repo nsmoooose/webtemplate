@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:xi="http://www.w3.org/2001/XInclude"
+      xmlns:py="http://genshi.edgewall.org/">
+  <xi:include href="master.html" />
+  <head>
+    <title>Add user</title>
+  </head>
+  <body>
+    <h1>Add user</h1>
+	<div class="help">
+	  Add a single user to the system.
+	</div>
+	<form method="post">
+	  <table>
+		<tr>
+		  <td>Login:</td>
+		  <td>
+			<input name="login" />
+			<span py:if="'login' in errors" class="error">${errors.login}</span>
+		  </td>
+		</tr>
+		<tr>
+		  <td>Full name:</td>
+		  <td>
+			<input name="fullname" />
+			<span py:if="'fullname' in errors" class="error">${errors.fullname}</span>
+		  </td>
+		</tr>
+		<tr>
+		  <td>Password:</td>
+		  <td>
+			<input name="password" />
+			<span py:if="'password' in errors" class="error">${errors.password}</span>
+		  </td>
+		</tr>
+		<tr>
+		  <td>Type:</td>
+		  <td>
+			<select name="type">
+			  <option>admin</option>
+			  <option>customer</option>
+			</select>
+		  </td>
+		</tr>
+		<tr>
+		  <td align="right" colspan="2">
+			<input type="submit" value="OK"/>
+		  </td>
+		</tr>
+	  </table>
+	</form>
+  </body>
+</html>

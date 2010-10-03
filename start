@@ -1,0 +1,82 @@
+#!/usr/bin/python
+import cherrypy
+import getopt
+import os
+import os.path
+import webapp.web.db
+import webapp.web.root
+import webapp.api.model
+import sys
+
+from cherrypy.process.plugins import Daemonizer, PIDFile
+
+USAGE = """
+Parameters:
+  -h --help           This page.
+  -d --daemon         Starts the application as a daemon
+  -p --pid-file       Pid file when running as a daemon
+  -c --config-dir     The configuration and database directory to use
+  --port              The port to use. Default 9091
+  --thread_pool       Number of threads. Default 6.
+"""
+
+if __name__ == '__main__':
+    daemonize = False
+    pid_file = None
+    port = 9091
+    thread_pool = 6
+
+    try:
+        options, args = getopt.getopt(sys.argv[1:], "dhp:", [
+                "daemon",
+                "help",
+                "pid-file=",
+                "port=",
+                "thread_pool=",
+                ])
+    except getopt.GetoptError, message:
+        print(message)
+        print(USAGE)
+        sys.exit(2)
+
+    for option, value in options:
+        if option in ("-h", "--help"):
+            print(USAGE)
+            sys.exit(0)
+        elif option in ("-d", "--daemon"):
+            daemonize=True
+        elif option in ("-p", "--pid-file"):
+            pid_file = value
+        elif option in ("--port"):
+            port = int(value)
+        elif option in ("--thread_pool"):
+            thread_pool = int(value)
+        else:
+            print("Unrecognized option")
+            sys.exit(2)
+
+    config = {
+        "global" : {
+            "server.socket_port" : port,
+            "server.thread_pool" : thread_pool,
+            "tools.auth.on" : True,
+            "tools.sessions.on" : True,
+            "tools.staticdir.root" : os.path.join(os.getcwd(), "webapp" , "web")
+            },
+        "/static" : {
+            "tools.staticdir.on" : True,
+            "tools.staticdir.dir" : "static"
+            }
+        }
+
+    if daemonize:
+        print("Starting as a daemon")
+        Daemonizer(cherrypy.engine).subscribe()
+        if pid_file is not None:
+            print("Using pid-file: %s" % pid_file)
+            PIDFile(cherrypy.engine, pid_file).subscribe()
+
+    webapp.web.db.OpenDatabase("webapp.db")
+
+    # Start the web server.
+    cherrypy.quickstart(webapp.web.root.Root(), "/", config=config)
