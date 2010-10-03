@@ -17,10 +17,11 @@ def check_credentials(username, password):
     session = db.Get()
 
     # This is a check that there always is an administrator
-    # account. If the administrator is missing or has been 
+    # account. If the administrator is missing or has been
     # deleted it will be recreated here.
     admin = session.query(model.User).filter_by(login="admin").first()
     if admin is None:
+        print("No admin account present in database. Creating with default password")
         admin = model.User("admin", "admin", "Administrator", "password")
         session.add(admin)
         session.commit()
@@ -29,7 +30,7 @@ def check_credentials(username, password):
     if user is None or user.VerifyPassword(password) is False:
         return "Incorrect username or password."
     return None
-    
+
 def check_auth(*args, **kwargs):
     """A tool that looks in config for 'auth.require'. If found and it
     is not None, a login is required and the entry is evaluated as alist of
