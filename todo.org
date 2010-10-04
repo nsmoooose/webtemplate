@@ -1,0 +1,24 @@
+Things that would be usefull to add to this template:
+
+* TODO Database caching
+  Some links for further reading:
+  http://www.sqlalchemy.org/docs/orm/examples.html?highlight=cache#beaker-caching
+
+* TODO Localization of messages and the ui
+  Some links for further reading:
+  http://genshi.edgewall.org/wiki/Documentation/i18n.html
+  http://docs.python.org/library/gettext.html
+
+* TODO User selectable locale from a dropdown
+* TODO UI generation from classes
+  Simple generation of an UI from a python class
+* TODO TDD adjustments
+* TODO Test coverage report
+  figleaf?
+* TODO Analyze source code for errors
+  There are source code analyzers for python that checks
+  a large number of things from naming conventions to
+  unused variables. For further reading:
+  http://www.logilab.org/project/pylint
+
+
