@@ -13,12 +13,13 @@ Things that would be usefull to add to this template:
 * TODO UI generation from classes
   Simple generation of an UI from a python class
 * TODO TDD adjustments
-* TODO Test coverage report
-  figleaf?
-* TODO Analyze source code for errors
+* DONE Test coverage report
+  nose is a testrunner that has support for test coverage report to html.
+* DONE Analyze source code for errors
   There are source code analyzers for python that checks
   a large number of things from naming conventions to
   unused variables. For further reading:
   http://www.logilab.org/project/pylint
+  http://pylint-messages.wikidot.com/all-codes
 
 

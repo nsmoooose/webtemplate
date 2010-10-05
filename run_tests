@@ -1,4 +1,4 @@
 #!/bin/sh
 export PYTHONPATH=.
-python webapp/tests/all.py -v
+nosetests --with-coverage --cover-html --cover-html-dir=coverage --cover-package=webapp
 
