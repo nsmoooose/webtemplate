@@ -3,13 +3,22 @@ import unittest
 
 class UserTests(unittest.TestCase):
     def testThatConstructorWork(self):
-        model.User("login", "admin", "my name", "password")
+        usera = model.User("login", "admin", "my name", "password")
+        self.assertEqual(usera.login, "login")
+        self.assertEqual(usera.user_type, "admin")
+        self.assertEqual(usera.fullname, "my name")
+        self.assertTrue(usera.password != "password")
+
         model.User("login", "customer", "my name", "password")
 
     def testThatTypeIsCorrect(self):
         self.assertRaises(
             ValueError, model.User, "login", "type", "fullname", "password")
 
+    def testPasswordVerification(self):
+        user = model.User("login", "admin", "my name", "password")
+        self.assertTrue(user.verify_password("password"))
+        self.assertFalse(user.verify_password("Password"))
 
 class DatabaseTests(unittest.TestCase):
     def testInMemoryDatabase(self):

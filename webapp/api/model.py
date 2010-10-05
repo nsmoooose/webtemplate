@@ -2,10 +2,10 @@
 Specifies the database model to use for this application.
 """
 
-from sqlalchemy import Table, Column, Integer, String, MetaData, ForeignKey
+from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import mapper, scoped_session, sessionmaker
+from sqlalchemy.orm import scoped_session, sessionmaker
 import hashlib
 
 Base = declarative_base()
@@ -23,7 +23,11 @@ class User(Base):
     fullname = Column("fullname", String)
     password = Column("password", String)
 
+    user_types = ["admin", "customer"]
+
     def __init__(self, login, user_type, fullname, password):
+        if not user_type in self.user_types:
+            raise ValueError, "Incorrect user type: %s" % user_type
         self.user_type = user_type
         self.login = login
         self.fullname = fullname
