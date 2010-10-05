@@ -1,3 +1,7 @@
+"""
+Decorator for an cherrypy function that represents a page. The decorator
+`output` specifies what genshi template to use for that page.
+"""
 import os
 
 import cherrypy
@@ -5,7 +9,7 @@ from genshi.core import Stream
 from genshi.output import encode, get_serializer
 from genshi.template import Context, TemplateLoader
 
-import ajax
+import webapp.web.ajax as ajax
 
 loader = TemplateLoader(
     os.path.join(os.path.dirname(__file__), 'templates'),
@@ -13,7 +17,8 @@ loader = TemplateLoader(
 )
 
 def output(filename, method='html', encoding='utf-8', **options):
-    """Decorator for exposed methods to specify what template the should use
+    """
+    Decorator for exposed methods to specify what template the should use
     for rendering, and which serialization method and options should be
     applied.
     """
@@ -33,7 +38,8 @@ def output(filename, method='html', encoding='utf-8', **options):
     return decorate
 
 def render(*args, **kwargs):
-    """Function to render the given data to the template specified via the
+    """
+    Function to render the given data to the template specified via the
     ``@output`` decorator.
     """
     if args:

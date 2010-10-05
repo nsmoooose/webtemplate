@@ -7,5 +7,6 @@ class UserTests(unittest.TestCase):
         model.User("login", "customer", "my name", "password")
 
     def testThatTypeIsCorrect(self):
-        self.assertRaises(ValueError, model.User, "login", "type", "fullname", "password")
+        self.assertRaises(
+            ValueError, model.User, "login", "type", "fullname", "password")
 

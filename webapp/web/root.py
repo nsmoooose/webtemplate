@@ -3,11 +3,15 @@ import genshi
 import sqlalchemy
 import sqlite3
 import sys
-import template
-from users import Users
-from auth import AuthController, require, member_of, name_is
+import webapp.web.template as template
+from webapp.web.users import Users
+from webapp.web.auth import AuthController, require
 
 class Root(object):
+    """
+    Serves the root (http://www.my_domain.org/) url.
+    """
+
     def __init__(self):
         self.users = Users()
         self.users.expose = True
@@ -18,6 +22,7 @@ class Root(object):
     @cherrypy.expose
     @template.output('index.html')
     def index(self):
+        """The default page."""
         return template.render()
 
     @cherrypy.expose
@@ -29,6 +34,9 @@ class Root(object):
     @cherrypy.expose
     @template.output('about.html')
     def about(self):
+        """
+        Present some information about what tools this application was developed with.
+        """
         versions = {
             "Python" : sys.version,
             "CherryPy" : cherrypy.__version__,

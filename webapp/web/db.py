@@ -1,13 +1,21 @@
-import cherrypy
+"""
+Provides access to a shared database.
+"""
 from webapp.api.model import Database
-from sys import exc_info
 
 database = None
 
-def Get():
-    return database.ScopedSession()
+def get():
+    """
+    Returns a new database session.
+    """
+    return database.scoped_session()
 
-def OpenDatabase(filename):
+def open_database(filename):
+    """
+    Opens the database and sets the global database to use. Use the `get`
+    function to obtain a new session.
+    """
     global database
     database = Database()
-    database.Open(filename)
+    database.open(filename)

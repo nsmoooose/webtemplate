@@ -1,2 +1,2 @@
 #!/bin/bash
-pylint --output-format=parseable webapp
+pylint --rcfile pylint.config --output-format=parseable webapp

@@ -42,7 +42,6 @@ entire page. */
 	width: 820px;
 	margin: 20px auto 0px auto;
 	height: 10px;
-	background-image: url(shadow-top.png);
 }
 
 #page {
@@ -67,7 +66,6 @@ entire page. */
 	width: 820px;
 	margin: auto;
 	height: 10px;
-	background-image: url(shadow-bottom.png);
 }
 
 /* Styles used to handle actual content of every page. */
