@@ -1,3 +1,7 @@
+"""
+Serves the web server root pages.
+"""
+
 import cherrypy
 import genshi
 import sqlalchemy

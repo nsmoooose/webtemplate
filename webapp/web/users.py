@@ -46,5 +46,5 @@ class Users(object):
 
         return template.render(errors=errors) | HTMLFormFiller(data=data)
 
-    def delete(self, id):
+    def delete(self, user_id):
         pass

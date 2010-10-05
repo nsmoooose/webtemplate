@@ -27,6 +27,9 @@ class User(object):
 class Database(object):
     def __init__(self):
         self.meta_data = MetaData()
+        self.engine = None
+        self.session = None
+        self.scoped_session = None
 
         users_table = Table("users", self.meta_data,
                             Column("id", Integer, primary_key=True),

@@ -1,13 +1,13 @@
+"""
+This is a excellent page describing this module:
+http://tools.cherrypy.org/wiki/AuthenticationAndAccessRestrictions
+"""
+
 import cherrypy
 import urllib
 import webapp.api.model as model
 import webapp.web.db as db
 import webapp.web.template as template
-
-"""
-This is a excellent page describing this module:
-http://tools.cherrypy.org/wiki/AuthenticationAndAccessRestrictions
-"""
 
 SESSION_KEY = '_cp_username'
 
@@ -59,13 +59,13 @@ cherrypy.tools.auth = cherrypy.Tool('before_handler', check_auth)
 def require(*conditions):
     """A decorator that appends conditions to the auth.require config
     variable."""
-    def decorate(f):
-        if not hasattr(f, '_cp_config'):
-            f._cp_config = dict()
-        if 'auth.require' not in f._cp_config:
-            f._cp_config['auth.require'] = []
-        f._cp_config['auth.require'].extend(conditions)
-        return f
+    def decorate(func):
+        if not hasattr(func, '_cp_config'):
+            func._cp_config = dict()
+        if 'auth.require' not in func._cp_config:
+            func._cp_config['auth.require'] = []
+        func._cp_config['auth.require'].extend(conditions)
+        return func
     return decorate
 
 def member_of(groupname):
@@ -137,6 +137,8 @@ class AuthController(object):
     @cherrypy.expose
     @template.output("login.html")
     def login(self, username=None, password=None, from_page="/"):
+        """Login page where you can enter username and password."""
+
         if username is None or password is None:
             return template.render(
                 **self.get_loginform("", from_page=from_page))
@@ -152,6 +154,10 @@ class AuthController(object):
 
     @cherrypy.expose
     def logout(self, from_page="/"):
+        """
+        Logout page that will terminate your session and redirect you
+        to the index page unless set.
+        """
         sess = cherrypy.session
         username = sess.get(SESSION_KEY, None)
         sess[SESSION_KEY] = None
