@@ -4,14 +4,24 @@ Specifies the database model to use for this application.
 
 from sqlalchemy import Table, Column, Integer, String, MetaData, ForeignKey
 from sqlalchemy import create_engine
+from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import mapper, scoped_session, sessionmaker
 import hashlib
 
-class User(object):
+Base = declarative_base()
+
+class User(Base):
     """
     A single user that can log in to the system. Object provides password
     verification.
     """
+
+    __tablename__ = "users"
+    userid = Column("id", Integer, primary_key=True)
+    login = Column("login", String, unique=True)
+    user_type = Column("type", String)
+    fullname = Column("fullname", String)
+    password = Column("password", String)
 
     def __init__(self, login, user_type, fullname, password):
         self.user_type = user_type
@@ -26,25 +36,17 @@ class User(object):
 
 class Database(object):
     def __init__(self):
-        self.meta_data = MetaData()
+        self.meta_data = Base.metadata
         self.engine = None
         self.session = None
         self.scoped_session = None
 
-        users_table = Table("users", self.meta_data,
-                            Column("id", Integer, primary_key=True),
-                            Column("login", String, unique=True),
-                            Column("user_type", String),
-                            Column("fullname", String),
-                            Column("password", String))
-        mapper(User, users_table)
-
-    def open(self, filename):
+    def open(self, filename, echo=True):
         """Opens the sqlite database for this program. Creates the
         database if it doesn exist yet.
         Returns a sessionmaker for easy session access."""
 
-        self.engine = create_engine("sqlite:///%s" % filename, echo=True)
+        self.engine = create_engine(filename, echo=echo)
         self.meta_data.create_all(self.engine)
         self.session = sessionmaker(
             bind=self.engine, autoflush=True, autocommit=False)

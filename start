@@ -76,7 +76,7 @@ if __name__ == '__main__':
             print("Using pid-file: %s" % pid_file)
             PIDFile(cherrypy.engine, pid_file).subscribe()
 
-    webapp.web.db.open_database("webapp.db")
+    webapp.web.db.open_database("sqlite:///webapp.db")
 
     # Start the web server.
     cherrypy.quickstart(webapp.web.root.Root(), "/", config=config)

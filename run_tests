@@ -1,4 +1,5 @@
 #!/bin/sh
 export PYTHONPATH=.
+[ -f .coverage ] && rm .coverage
 nosetests --with-coverage --cover-html --cover-html-dir=coverage --cover-package=webapp
 
