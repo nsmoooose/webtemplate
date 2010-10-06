@@ -1,4 +1,5 @@
 .coverage
 *.pyc
 coverage
+doc/_build
 webapp.db

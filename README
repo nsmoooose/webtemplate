@@ -1,0 +1,10 @@
+Some requirements by this project:
+* genshi
+* sqlalchemy
+* formencode
+* sqlite
+* cherrypy
+* pylint
+* coverage
+* nose
+* sphinx
