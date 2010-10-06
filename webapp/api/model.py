@@ -39,19 +39,33 @@ class User(Base):
         return hashlib.md5(password).hexdigest() == self.password
 
 class Database(object):
+    """
+    Object that handles the database.
+
+    New database sessions are available through the `scoped_session`
+    member.
+    """
+
     def __init__(self):
-        self.meta_data = Base.metadata
-        self.engine = None
-        self.session = None
-        self.scoped_session = None
+        self._meta_data = Base.metadata
+        self._engine = None
+        self._session = None
+        self._scoped_session = None
 
     def open(self, filename, echo=True):
-        """Opens the sqlite database for this program. Creates the
-        database if it doesn exist yet.
-        Returns a sessionmaker for easy session access."""
+        """
+        Opens the database for this program. Creates the database if it doesnt
+        exist yet.
+        """
 
-        self.engine = create_engine(filename, echo=echo)
-        self.meta_data.create_all(self.engine)
-        self.session = sessionmaker(
-            bind=self.engine, autoflush=True, autocommit=False)
-        self.scoped_session = scoped_session(self.session)
+        self._engine = create_engine(filename, echo=echo)
+        self._meta_data.create_all(self._engine)
+        self._session = sessionmaker(
+            bind=self._engine, autoflush=True, autocommit=False)
+        self._scoped_session = scoped_session(self._session)
+
+    def new_session(self):
+        """
+        Returns a new scoped session.
+        """
+        return self._scoped_session()

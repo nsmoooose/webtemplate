@@ -8,6 +8,8 @@ Welcome to webapp's documentation!
 
 Contents:
 
+.. automodule:: webapp.api.model
+   :members:
 .. toctree::
    :maxdepth: 2
 
@@ -17,4 +19,3 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
-

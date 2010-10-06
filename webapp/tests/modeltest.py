@@ -25,10 +25,17 @@ class DatabaseTests(unittest.TestCase):
         db = model.Database()
         db.open("sqlite://")
 
-        session = db.scoped_session()
+        session = db.new_session()
         user = model.User("henrikn", "admin", "Henrik Nilsson", "password")
         session.add(user)
         session.commit()
+
+    def testCreateANewSession(self):
+        db = model.Database()
+        db.open("sqlite://")
+
+        session = db.new_session()
+        self.assertFalse(session is None)
 
 if __name__ == '__main__':
     unittest.main()
