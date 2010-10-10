@@ -3,7 +3,10 @@ Serves the web server root pages.
 """
 
 import cherrypy
+import coverage
 import genshi
+import nose
+import sphinx
 import sqlalchemy
 import sqlite3
 import sys
@@ -47,6 +50,9 @@ class Root(object):
             "SQLAlchemy" : sqlalchemy.__version__,
             "FormEncode" : "Not exposed by package",
             "Genshi" : genshi.__version__,
-            "sqlite" : sqlite3.version
+            "Nose" : nose.__version__,
+            "sqlite" : sqlite3.version,
+            "Sphinx" : sphinx.__version__,
+            "Coverage" : coverage.__version__
             }
         return template.render(versions=versions)

@@ -12,7 +12,10 @@ Things that would be usefull to add to this template:
 * TODO User selectable locale from a dropdown
 * TODO UI generation from classes
   Simple generation of an UI from a python class
+* TODO sphinx documentation.
 * TODO TDD adjustments
+  http://ivory.idyll.org/articles/twill-and-wsgi_intercept.html
+  http://www.heikkitoivonen.net/blog/2009/11/24/testing-cherrypy-3-application-with-twill-and-nose/
 * DONE Test coverage report
   nose is a testrunner that has support for test coverage report to html.
 * DONE Analyze source code for errors
@@ -21,5 +24,3 @@ Things that would be usefull to add to this template:
   unused variables. For further reading:
   http://www.logilab.org/project/pylint
   http://pylint-messages.wikidot.com/all-codes
-
-

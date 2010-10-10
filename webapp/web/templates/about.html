@@ -13,24 +13,41 @@
 	</div>
 	<h2>Information</h2>
 	<p>
-	  This tool is developed with open source tools. Programing language 
+	  This tool is developed with open source tools. Programing language
 	  is a scriptable language named <a href="http://www.python.org">Python</a>.
 	  <a href="http://www.cherrypy.org">CherryPy</a> is used to serve pages.
-	  This is a tiny and efficient web server. 
+	  This is a tiny and efficient web server.
 	</p>
 	<p>
-	  <a href="http://genshi.edgewall.org/">Genshi</a> is a powerfull 
-	  templating engine. It renders html content based on template files. 
-	  To validate content sent from the web client 
+	  <a href="http://genshi.edgewall.org/">Genshi</a> is a powerfull
+	  templating engine. It renders html content based on template files.
+	  To validate content sent from the web client
 	  <a href="http://formencode.org/">FormEncode</a> is used. It ensures that
 	  the application is protected from injection attacks.
 	</p>
 	<p>
 	  To store data <a href="http://www.sqlite.org/">SQLite</a> is used. SQLite is
 	  a tiny database engine used by embedded applications. To simplify database
-	  access an OR mapper has been used. It is named 
-	  <a href="http://www.sqlalchemy.org/">SQLAlchemy</a>. It maps between python 
-	  objects and database tables.
+	  access an <a href="http://en.wikipedia.org/wiki/Object-relational_mapping">
+		OR mapper</a> has been used. It is named
+	  <a href="http://www.sqlalchemy.org/">SQLAlchemy</a>. It maps between python
+	  objects and database tables. It also supports mapping between other
+	  database vendors than sqlite.
+	</p>
+	<p>
+	  To make proper documentation <a href="http://sphinx.pocoo.org/">Sphinx</a> is
+	  used. It creates html documentation for the application and the source code.
+	</p>
+	<p>
+	  Ensuring quality by using a <a href="http://en.wikipedia.org/wiki/Test-driven_development">
+		test driven development</a> approach. Automated tests must be run and for
+	  that job <a href="http://somethingaboutorange.com/mrl/projects/nose/">nose</a>
+	  has been choosen. It finds all your unit tests and executes
+	  them with a <a href="http://nedbatchelder.com/code/coverage/">coverage</a>
+	  report. This so you can see what parts of your application
+	  that are tested and the bits that isn't tested. <a href="http://www.logilab.org/857">
+		pylint</a> is an excellent tool
+	  to use when finding common mistakes and make the source code consistent.
 	</p>
 	<h2>Development tools</h2>
 	<table class="listing">

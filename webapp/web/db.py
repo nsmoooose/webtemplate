@@ -9,7 +9,7 @@ def get():
     """
     Returns a new database session.
     """
-    return database.scoped_session()
+    return database._scoped_session()
 
 def open_database(filename):
     """
