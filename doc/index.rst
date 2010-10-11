@@ -8,10 +8,12 @@ Welcome to webapp's documentation!
 
 Contents:
 
-.. automodule:: webapp.api.model
-   :members:
+Need to write something
+
 .. toctree::
    :maxdepth: 2
+
+   devel
 
 Indices and tables
 ==================
