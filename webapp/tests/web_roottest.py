@@ -6,7 +6,14 @@ from StringIO import StringIO
 
 class RootTest(unittest.TestCase):
     def setUp(self):
-        cherrypy.config.update({ "environment": "embedded" })
+        cherrypy.config.update(
+            {
+                "environment": "embedded",
+                "global" : {
+                    "tools.auth.on" : True,
+                    "tools.sessions.on" : True,
+                    }
+                })
         wsgiApp = cherrypy.tree.mount(webapp.web.root.Root())
         cherrypy.server.start()
         twill.add_wsgi_intercept('localhost', 8080, lambda : wsgiApp)
@@ -17,16 +24,17 @@ class RootTest(unittest.TestCase):
         twill.remove_wsgi_intercept('localhost', 8080)
         cherrypy.server.stop()
 
-    def testIndex(self):
+    def test_index(self):
         script = "find 'Start page'"
         twill.execute_string(script, initial_url='http://localhost:8080/')
 
-    def testChangePasswordAndUnauthorizedAccess(self):
-        # TODO dectect the redirect?
-        # root = webapp.web.root.Root()
-        # html = root.changepassword()
-        # print(html)
-        raise NotImplementedError
+    def test_about(self):
+        script = "find 'About this application'"
+        twill.execute_string(script, initial_url='http://localhost:8080/about')
+
+    def test_change_password_and_unauthorized_access(self):
+        script = "find 'Enter login information'"
+        twill.execute_string(script, initial_url='http://localhost:8080/changepassword')
 
 if __name__ == '__main__':
     unittest.main()
