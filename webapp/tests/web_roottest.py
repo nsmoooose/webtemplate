@@ -1,11 +1,13 @@
 import cherrypy
 import twill
 import unittest
+import webapp.web.db
 import webapp.web.root
 from StringIO import StringIO
 
 class RootTest(unittest.TestCase):
     def setUp(self):
+        webapp.web.db.open_database("sqlite://")
         cherrypy.config.update(
             {
                 "environment": "embedded",
