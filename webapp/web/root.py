@@ -10,6 +10,7 @@ import sphinx
 import sqlalchemy
 import sqlite3
 import sys
+import twill
 import webapp.web.template as template
 from webapp.web.users import Users
 from webapp.web.auth import AuthController, require
@@ -53,6 +54,7 @@ class Root(object):
             "Nose" : nose.__version__,
             "sqlite" : sqlite3.version,
             "Sphinx" : sphinx.__version__,
+            "Twill" : twill.__version__,
             "Coverage" : coverage.__version__
             }
         return template.render(versions=versions)

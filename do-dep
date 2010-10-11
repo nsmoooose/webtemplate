@@ -33,6 +33,7 @@ if __name__ == '__main__':
    print("")
    print("Testing development tools")
    dep_module_check("coverage")
+   dep_module_check("twill")
    dep_tool_check("pylint")
    dep_tool_check(["nosetests", "--help"])
    dep_tool_check("sphinx-build")
