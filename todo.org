@@ -10,10 +10,27 @@ Things that would be usefull to add to this template:
   http://docs.python.org/library/gettext.html
 
 * TODO User selectable locale from a dropdown
+* TODO Context awarenes of the system.
+  You should assign yourself a profile. A profile can
+  be "system administration" which means that you will
+  perform system configuration, adding / removing users.
+
+  An other profile can be "customer order" where your
+  menu is arranged for taking orders and tasks involving
+  orders.
+
+  profiles can be overlapping. For instance if you choose
+  "invoicing" you can create and print invoices. Customer
+  invoicing might be present in the "customer order"
+  profile as well.
 * TODO UI generation from classes
   Simple generation of an UI from a python class
 * TODO sphinx documentation.
-* TODO TDD adjustments
+** TODO Better template than the default.
+   Need something that looks like the rest of the web site.
+** TODO Direct links from the different pages
+   Direct links from web page to the documentation.
+* DONE TDD adjustments
   http://ivory.idyll.org/articles/twill-and-wsgi_intercept.html
   http://www.heikkitoivonen.net/blog/2009/11/24/testing-cherrypy-3-application-with-twill-and-nose/
 * DONE Test coverage report

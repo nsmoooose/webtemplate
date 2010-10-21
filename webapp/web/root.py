@@ -11,6 +11,8 @@ import sqlalchemy
 import sqlite3
 import sys
 import twill
+import webapp.api.model as model
+import webapp.web.db as db
 import webapp.web.template as template
 from webapp.web.users import Users
 from webapp.web.auth import AuthController, require
@@ -31,7 +33,9 @@ class Root(object):
     @template.output('index.html')
     def index(self):
         """The default page."""
-        return template.render()
+        session = db.get()
+        articles = session.query(model.NewsArticle)
+        return template.render(articles=articles)
 
     @cherrypy.expose
     @require()

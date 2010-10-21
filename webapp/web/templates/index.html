@@ -8,7 +8,9 @@
   </head>
   <body>
     <h1>News</h1>
-
-
+	<py:for each="article in articles">
+	  <h2>${article.title}</h2>
+	  <p>${article.text}</p>
+	</py:for>
   </body>
 </html>

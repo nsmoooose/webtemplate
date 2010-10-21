@@ -1,0 +1,23 @@
+#!/usr/bin/python
+import webapp.api.model
+import webapp.web.db
+
+Articles = [
+    "Welcome to this application",
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi rutrum laoreet nisi, a imperdiet " +
+    "erat tempus egestas. Cras non eros nunc, a tempus lectus. Curabitur nulla lorem, semper a lacinia " +
+    "in, ullamcorper non mauris. Aliquam adipiscing faucibus arcu, iaculis viverra ante accumsan at. Donec " +
+    "ligula justo, varius non malesuada nec, fermentum eu nulla. Fusce at neque erat, non hendrerit augue. " +
+    "Curabitur ultrices elementum iaculis. Ut rutrum mollis tempor. Maecenas gravida, massa nec imperdiet " +
+    "accumsan, eros risus egestas lacus, sed pretium diam arcu et leo. Vestibulum vestibulum erat sit amet " +
+    "ante luctus eget interdum tellus ornare. Fusce blandit erat id elit sollicitudin sit amet volutpat " +
+    "lacus consequat. Donec porta auctor ultrices."
+    ]
+
+if __name__ == '__main__':
+    webapp.web.db.open_database("sqlite:///webapp.db")
+    session = webapp.web.db.get()
+
+    for article_text in Articles:
+        session.add(webapp.api.model.NewsArticle("A title", article_text, "Henrik Nilsson"))
+    session.commit()

@@ -10,6 +10,22 @@ import hashlib
 
 Base = declarative_base()
 
+class NewsArticle(Base):
+    """
+    A news article that can be displayed on the frontpage of the application.
+    """
+
+    __tablename__ = "newsarticle"
+    articleid = Column("id", Integer, primary_key=True)
+    title = Column("title", String)
+    text = Column("text", String)
+    author = Column("author", String)
+
+    def __init__(self, title, text, author):
+        self.title = title
+        self.text = text
+        self.author = author
+
 class User(Base):
     """
     A single user that can log in to the system. Object provides password
