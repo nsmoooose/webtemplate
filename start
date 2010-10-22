@@ -1,6 +1,6 @@
 #!/usr/bin/python
 import cherrypy
-import getopt
+import optparse
 import os
 import os.path
 import webapp.web.db
@@ -10,54 +10,19 @@ import sys
 
 from cherrypy.process.plugins import Daemonizer, PIDFile
 
-USAGE = """
-Parameters:
-  -h --help           This page.
-  -d --daemon         Starts the application as a daemon
-  -p --pid-file       Pid file when running as a daemon
-  --port              The port to use. Default 9091
-  --thread_pool       Number of threads. Default 6.
-"""
-
 if __name__ == '__main__':
-    daemonize = False
-    pid_file = None
-    port = 9091
-    thread_pool = 6
-
-    try:
-        options, args = getopt.getopt(sys.argv[1:], "dhp:", [
-                "daemon",
-                "help",
-                "pid-file=",
-                "port=",
-                "thread_pool=",
-                ])
-    except getopt.GetoptError, message:
-        print(message)
-        print(USAGE)
-        sys.exit(2)
-
-    for option, value in options:
-        if option in ("-h", "--help"):
-            print(USAGE)
-            sys.exit(0)
-        elif option in ("-d", "--daemon"):
-            daemonize=True
-        elif option in ("-p", "--pid-file"):
-            pid_file = value
-        elif option in ("--port"):
-            port = int(value)
-        elif option in ("--thread_pool"):
-            thread_pool = int(value)
-        else:
-            print("Unrecognized option")
-            sys.exit(2)
+    usage = "%prog [--help] [options]"
+    parser = optparse.OptionParser(usage=usage)
+    parser.add_option("--port", dest="port", type='int', help="port to use (default %default)", default=9091)
+    parser.add_option("--thread-pool", dest="thread_pool", type='int', help="Thread pool size (default %default)", default=6)
+    parser.add_option('--daemon', dest="daemonize", action='store_true', help="starts the process as a daemon")
+    parser.add_option('--pid-file', dest="pid_file", type='str', help="pid file when running as a daemon (default %default)", default="/var/run/webapp.pid")
+    options, args = parser.parse_args()
 
     config = {
         "global" : {
-            "server.socket_port" : port,
-            "server.thread_pool" : thread_pool,
+            "server.socket_port" : options.port,
+            "server.thread_pool" : options.thread_pool,
             "tools.auth.on" : True,
             "tools.sessions.on" : True,
             "tools.staticdir.root" : os.path.realpath(os.path.join(os.path.dirname(__file__), "webapp" , "web"))
@@ -68,12 +33,11 @@ if __name__ == '__main__':
             }
         }
 
-    if daemonize:
+    if options.daemonize:
         print("Starting as a daemon")
         Daemonizer(cherrypy.engine).subscribe()
-        if pid_file is not None:
-            print("Using pid-file: %s" % pid_file)
-            PIDFile(cherrypy.engine, pid_file).subscribe()
+        print("Using pid-file: %s" % options.pid_file)
+        PIDFile(cherrypy.engine, options.pid_file).subscribe()
 
     webapp.web.db.open_database("sqlite:///webapp.db")
 
