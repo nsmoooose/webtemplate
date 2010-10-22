@@ -16,6 +16,9 @@ loader = TemplateLoader(
     auto_reload=True
 )
 
+# Extend genshi context with these objects.
+context_extensions = {}
+
 def output(filename, method='html', encoding='utf-8', **options):
     """
     Decorator for exposed methods to specify what template the should use
@@ -49,5 +52,6 @@ def render(*args, **kwargs):
     else:
         template = cherrypy.thread_data.template
     ctxt = Context(url=cherrypy.url)
+    ctxt.push(context_extensions)
     ctxt.push(kwargs)
     return template.generate(ctxt)
