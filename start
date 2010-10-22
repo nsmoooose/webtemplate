@@ -15,7 +15,6 @@ Parameters:
   -h --help           This page.
   -d --daemon         Starts the application as a daemon
   -p --pid-file       Pid file when running as a daemon
-  -c --config-dir     The configuration and database directory to use
   --port              The port to use. Default 9091
   --thread_pool       Number of threads. Default 6.
 """
@@ -61,7 +60,7 @@ if __name__ == '__main__':
             "server.thread_pool" : thread_pool,
             "tools.auth.on" : True,
             "tools.sessions.on" : True,
-            "tools.staticdir.root" : os.path.join(os.getcwd(), "webapp" , "web")
+            "tools.staticdir.root" : os.path.realpath(os.path.join(os.path.dirname(__file__), "webapp" , "web"))
             },
         "/static" : {
             "tools.staticdir.on" : True,
@@ -78,5 +77,4 @@ if __name__ == '__main__':
 
     webapp.web.db.open_database("sqlite:///webapp.db")
 
-    # Start the web server.
     cherrypy.quickstart(webapp.web.root.Root(), "/", config=config)
