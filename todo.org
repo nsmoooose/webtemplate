@@ -1,5 +1,7 @@
 Things that would be usefull to add to this template:
 
+* TODO Wiki parser
+  Some kind of wiki parser for news items and other textual elements.
 * TODO Database caching
   Some links for further reading:
   http://www.sqlalchemy.org/docs/orm/examples.html?highlight=cache#beaker-caching

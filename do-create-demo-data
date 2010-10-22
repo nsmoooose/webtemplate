@@ -1,6 +1,5 @@
 #!/usr/bin/python
 import webapp.api.model
-import webapp.web.db
 
 Articles = [
     "Welcome to this application",
@@ -15,9 +14,16 @@ Articles = [
     ]
 
 if __name__ == '__main__':
-    webapp.web.db.open_database("sqlite:///webapp.db")
-    session = webapp.web.db.get()
+    db = webapp.api.model.Database()
+    db.open("sqlite:///webapp.db")
+    session = db.new_session()
 
     for article_text in Articles:
         session.add(webapp.api.model.NewsArticle("A title", article_text, "Henrik Nilsson"))
+
+    session.add(webapp.api.model.User("henrikn", "customer", "Henrik Nilsson", "123"))
+    session.add(webapp.api.model.User("christinan", "customer", "Christina Nilsson", "123"))
+    session.add(webapp.api.model.User("svenv", "customer", "Sven Vult", "123"))
+    session.add(webapp.api.model.User("perg", "customer", "Per Gustafsson", "123"))
+
     session.commit()

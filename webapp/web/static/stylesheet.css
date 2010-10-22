@@ -82,7 +82,8 @@ entire page. */
 	border-bottom-color: #aaaaaa;
 }
 
-#menu {
+nav {
+	display: block;
 	margin-top: 5px;
 	text-align: left;
 	float: left;
@@ -90,7 +91,7 @@ entire page. */
 	height: 300px;
 }
 
-#menu > a {
+nav > a {
 	margin-left: 10px;
 	display: block;
 }
@@ -135,7 +136,7 @@ table.listing {
 }
 
 table.listing thead {
-	background: #F7F7F0 none repeat scroll 0 0
+	background: #E7E7E0 none repeat scroll 0 0
 }
 
 table.listing thead th {
@@ -151,6 +152,9 @@ table.listing tbody td {
 	border: 1px dotted #DDDDDD;
 }
 
-table.listing tbody tr {
+table.listing tbody tr:nth-child(even) {
 	border-top: 1px solid #DDDDDD;
+}
+table.listing tbody tr:nth-child(even) {
+	background: #E7E7E0;
 }
