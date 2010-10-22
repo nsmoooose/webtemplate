@@ -1,15 +1,10 @@
 """
 Provides access to a shared database.
 """
+import cherrypy
 from webapp.api.model import Database
 
 database = None
-
-def get():
-    """
-    Returns a new database session.
-    """
-    return database._scoped_session()
 
 def open_database(filename):
     """
@@ -19,3 +14,21 @@ def open_database(filename):
     global database
     database = Database()
     database.open(filename)
+
+def close_database():
+    database.close()
+
+def get():
+    """
+    Returns a new database session.
+    """
+    if cherrypy.session.has_key("db"):
+        return cherrypy.session["db"]
+
+    def db_close_hook():
+        del cherrypy.session["db"]
+
+    s = database._scoped_session()
+    cherrypy.session["db"] = s
+    cherrypy.request.hooks.attach("on_end_request", db_close_hook)
+    return s
