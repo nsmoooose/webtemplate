@@ -10,7 +10,7 @@ Things that would be usefull to add to this template:
   Some links for further reading:
   http://genshi.edgewall.org/wiki/Documentation/i18n.html
   http://docs.python.org/library/gettext.html
-
+  http://babel.edgewall.org/wiki/Documentation/index.html
 * TODO User selectable locale from a dropdown
 * TODO Context awarenes of the system.
   You should assign yourself a profile. A profile can

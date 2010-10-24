@@ -6,6 +6,7 @@ import os
 
 import cherrypy
 from genshi.core import Stream
+from genshi.filters import Translator
 from genshi.output import encode, get_serializer
 from genshi.template import Context, TemplateLoader
 
@@ -51,6 +52,8 @@ def render(*args, **kwargs):
         template = loader.load(args[0])
     else:
         template = cherrypy.thread_data.template
+    translator = Translator()
+    template.filters.insert(0, translator)
     ctxt = Context(url=cherrypy.url)
     ctxt.push(context_extensions)
     ctxt.push(kwargs)
