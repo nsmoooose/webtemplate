@@ -1,5 +1,6 @@
 .coverage
 *.pyc
+*.mo
 coverage
 doc/_build
 webapp.db

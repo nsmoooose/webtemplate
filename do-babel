@@ -1,0 +1,3 @@
+pybabel extract -F babel.ini --output webapp/web/localedir/messages.pot webapp/web/templates
+pybabel update -i webapp/web/localedir/messages.pot --locale sv --output-dir webapp/web/localedir/
+pybabel compile --use-fuzzy --directory webapp/web/localedir
