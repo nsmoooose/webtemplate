@@ -10,6 +10,17 @@ import hashlib
 
 Base = declarative_base()
 
+class ApplicationSettings(Base):
+    """
+    Settings for the application like the application name.
+    """
+    __tablename__ = "application_settings"
+    application_id = Column("id", Integer, primary_key=True)
+    name = Column(String)
+
+    def __init__(self, name):
+        self.name = name
+
 class NewsArticle(Base):
     """
     A news article that can be displayed on the frontpage of the application.
@@ -71,7 +82,8 @@ class Database(object):
     def open(self, filename, echo=True):
         """
         Opens the database for this program. Creates the database if it doesnt
-        exist yet.
+        exist yet. Also makes sure that there is an ApplicationSettings object
+        present in the database.
         """
 
         self._engine = create_engine(filename, echo=echo)
@@ -79,6 +91,13 @@ class Database(object):
         self._session = sessionmaker(
             bind=self._engine, autoflush=True, autocommit=False)
         self._scoped_session = scoped_session(self._session)
+
+        # Make sure that there is a application settings object
+        session = self.new_session()
+        rows = session.query(ApplicationSettings).all()
+        if len(rows) == 0:
+            session.add(ApplicationSettings("Template application"))
+        session.commit()
 
     def new_session(self):
         """

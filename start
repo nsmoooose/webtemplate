@@ -3,9 +3,10 @@ import cherrypy
 import optparse
 import os
 import os.path
-import webapp.web.db
+import webapp.api.model as model
+import webapp.web.db as db
 import webapp.web.root
-import webapp.api.model
+import webapp.web.template
 import sys
 
 from cherrypy.process.plugins import Daemonizer, PIDFile
@@ -32,6 +33,9 @@ if __name__ == '__main__':
             "tools.staticdir.dir" : "static"
             }
         }
+
+    webapp.web.template.context_extensions["application_settings"] = \
+        lambda: db.get().query(model.ApplicationSettings).one()
 
     if options.daemonize:
         print("Starting as a daemon")
