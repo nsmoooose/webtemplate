@@ -82,6 +82,11 @@ entire page. */
 	border-bottom-color: #aaaaaa;
 }
 
+/* select language form */
+#header > form {
+	float: right;
+}
+
 nav {
 	display: block;
 	margin-top: 5px;

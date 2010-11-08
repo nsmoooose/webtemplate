@@ -5,7 +5,9 @@ Serves the web server root pages.
 import cherrypy
 import coverage
 import genshi
+import gettext
 import nose
+import os.path
 import sphinx
 import sqlalchemy
 import sqlite3
@@ -36,6 +38,15 @@ class Root(object):
         session = db.get()
         articles = session.query(model.NewsArticle)
         return template.render(articles=articles)
+
+    @cherrypy.expose
+    def set_language(self, language):
+        locale_dir = os.path.join(os.path.dirname(__file__), "localedir")
+        domain = "messages"
+        codeset = "utf-8"
+        gettext.bindtextdomain(domain, locale_dir)
+        gettext.textdomain(domain)
+        raise cherrypy.HTTPRedirect('/')
 
     @cherrypy.expose
     @require()

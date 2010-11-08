@@ -11,6 +11,7 @@ Things that would be usefull to add to this template:
   http://genshi.edgewall.org/wiki/Documentation/i18n.html
   http://docs.python.org/library/gettext.html
   http://babel.edgewall.org/wiki/Documentation/index.html
+  http://genshi.edgewall.org/wiki/GenshiTutorial/Internationalization
 * TODO User selectable locale from a dropdown
 * TODO Context awarenes of the system.
   You should assign yourself a profile. A profile can

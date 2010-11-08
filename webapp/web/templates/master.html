@@ -19,6 +19,12 @@
       </div>
       <div id="page">
         <div id="header">
+		  <form action="${url('/set_language')}" method="post">
+			<select name="language" onchange="this.form.submit();">
+			  <option value="sv">English</option>
+			  <option value="en">Svenska</option>
+			</select>
+		  </form>
         </div>
         <nav>
           <h1>Menu</h1>
