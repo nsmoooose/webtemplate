@@ -57,4 +57,6 @@ def render(*args, **kwargs):
     ctxt = Context(url=cherrypy.url)
     ctxt.push(context_extensions)
     ctxt.push(kwargs)
-    return template.generate(ctxt)
+    cherrypy.response.headers["Content-Type"] = "application/xhtml+xml"
+    stream = template.generate(ctxt)
+    return stream.render("xhtml")
