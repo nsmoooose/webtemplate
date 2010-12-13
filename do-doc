@@ -1,2 +1,3 @@
 #!/bin/bash
 make -C doc html
+[ -h webapp/web/static/doc ] || ln -s ../../../doc/_build/html webapp/web/static/doc

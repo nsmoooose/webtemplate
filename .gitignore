@@ -4,3 +4,4 @@
 coverage
 doc/_build
 webapp.db
+webapp/web/static/doc
